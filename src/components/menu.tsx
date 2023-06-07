@@ -1,12 +1,21 @@
 import React from 'react';
 import { FC, useState } from 'react';
-import { Menu, MenuProps, Button,  Layout} from 'antd';
+import { Menu, MenuProps, Button,  Layout, Space} from 'antd';
 import type { ItemType, MenuItemType, SubMenuType,  } from "antd/es/menu/hooks/useItems";
 import 'antd/dist/reset.css';
 import '../App.css';
 import {MenuFoldOutlined,
   MenuUnfoldOutlined, HomeOutlined, BarChartOutlined, SettingOutlined, ImportOutlined, UserOutlined,
-DashboardOutlined, TeamOutlined, RocketOutlined, IconProvider, SendOutlined, EnterOutlined} from '@ant-design/icons'
+DashboardOutlined, TeamOutlined, RocketOutlined, IconProvider, SendOutlined, EnterOutlined, SwapOutlined, ShoppingCartOutlined, ShoppingFilled, ShoppingOutlined, CheckCircleOutlined} from '@ant-design/icons'
+import Icon from '@ant-design/icons/lib/components/Icon';
+import { ApplicationSVG } from '../SVG/ApplicationsSVG';
+import { hover } from '@testing-library/user-event/dist/hover';
+import { FilterSVG } from '../SVG/FilterSVG';
+import { IulaanSVG } from '../SVG/IulaanSVG';
+import { PracticalSVG } from '../SVG/PracticalSVG';
+import { InterviewSVG } from '../SVG/InterviewSVG';
+import { RecruitSVG } from '../SVG/RecruitSVG';
+import { HiringProcessSVG } from '../SVG/HiringSVG';
 
 
 
@@ -30,23 +39,18 @@ function getItem(
 }
 
 const items: MenuProps['items'] = [
-  getItem('Dashboard','/dashboard',<DashboardOutlined/>),
-  getItem('Check In/Out', '/checkout', <SendOutlined/>),
-  getItem('Consumables', '/consumables', <RocketOutlined/>),
-  getItem('People', '/people', <TeamOutlined />),
-  getItem('Import','/import',<ImportOutlined/>),
-  getItem('Settings', '/settings', <SettingOutlined/>, [
-    getItem('Categories', '/category'),
-    getItem('Departments', '/department'),
-    getItem('Locations', '/location'),
-    getItem('Adjustments','/adjustments',null,[
-      getItem('Positive', '/adjpostive'),
-      getItem('Negative','/adjnegative')
-    ])
-  ]),
-  getItem('Reports','/reports',<BarChartOutlined/>, [
-    getItem('Activity Report', '/activityReport')
-  ])
+  getItem('Dashboard','/dashboard',<DashboardOutlined style={{fontSize:'21px'}}/>),
+  getItem('Applications', '/applications', <Icon component={ApplicationSVG} />),
+  getItem('Iulaan', '/iulaan',<Icon component={IulaanSVG} />),
+  
+  getItem(' Workflow', 'sub3', <Icon component={HiringProcessSVG} style={{paddingTop: '.3vh'}}/>, [
+    getItem('Filtered', '/filtered', <Icon component={FilterSVG}/>),
+    getItem('Practical', '/practical', <Icon component={PracticalSVG} />),
+    getItem('Interview', '/interview',  <Icon component={InterviewSVG} />),
+    getItem('Passed','/passed',<CheckCircleOutlined />),
+    getItem('Recruited','/recruited', <Icon component={RecruitSVG}/>),
+   ]),
+
 ]
 
 
@@ -70,11 +74,11 @@ const [collapsed, setCollapsed] = useState(false);
   return (
 
     
-    <div style={{height: '100vh', backgroundColor: "#001529" }}>
+    <div style={{height: '100vh', background: 'linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9))',   boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
      
-      <Button  onClick={toggleCollapsed} style={{marginBottom:16}} >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined/>}
-      </Button>
+      <Space style={{marginBottom:'5vh'}} >
+         <span/>
+      </Space>
 
       <div>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -83,11 +87,11 @@ const [collapsed, setCollapsed] = useState(false);
         defaultSelectedKeys={[window.location.pathname]}
         defaultOpenKeys={['one']}
         mode='inline'
-        theme='dark'
         items= {items}
+        style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         />
       </Sider>
-      
+    
       </div>
      
             

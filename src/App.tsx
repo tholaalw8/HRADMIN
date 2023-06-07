@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 import { Headers } from './components/Header';
 import { Footer } from './components/Footer';
 import { Layout } from 'antd';
-import { FontColorsOutlined } from '@ant-design/icons';
+
 
 const { Content, Header} = Layout;
 
@@ -37,18 +37,19 @@ function App() {
          >
               <Header
                 style={{
-                  background: "white",
+                  background: "linear-gradient(to left, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9))",
                   display: "flex",
                   justifyContent: "center",
-                  height: "6vh",
+                  height: "6.3vh",
                   alignItems: "center",
+                  color: 'white'
                   
                   
                 }}
               > 
-              <Headers> DJA Inventory System </Headers></Header>
+              <Headers>  DJA Recruitement Portal Panel </Headers></Header>
                 
-         <Content>
+         <Content style={{marginLeft: 20, marginRight: 20}}>
              <Contents/>
          </Content>
        

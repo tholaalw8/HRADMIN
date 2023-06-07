@@ -1,10 +1,10 @@
-import { Button, Select, Space, Table, Modal, Form, Radio, Input } from "antd"
+import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
 import { PageTitle } from "../../components/pageTitle"
-import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UserAddOutlined } from "@ant-design/icons"
+import { DeleteOutlined, DownloadOutlined, EditOutlined, EyeFilled, EyeInvisibleTwoTone, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-import { CreateItem } from "../Consumable/CreateItem"
-import { EditItem } from "../Consumable/EditItem"
+import { CreateItem } from "./CreateItem"
+import { SeeIulaanParticipants } from "./SeeIulaanParticipants"
 
 
 
@@ -36,10 +36,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '200vh'}}
         open={open}
-        title="Create New User"
-        okText="Create User"
+        title="Create New Consumable Item"
+        okText="Create Item"
         cancelText="Cancel"
         onCancel={onCancel}
         onOk={() => {
@@ -54,7 +54,7 @@ interface Values {
             });
         }}
       >
-        {/* <CreateItem/> */}
+        <CreateItem/>
 
       </Modal>
     );
@@ -69,11 +69,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '130vh'}}
         open={EditOpen}
-        title="Edit User"
-        okText="Edit User"
-        cancelText="Cancel"
+        title="Applicants"
+        okText="ok"
         onCancel={onEditModalCancel}
         onOk={() => {
           form
@@ -87,7 +86,7 @@ interface Values {
             });
         }}
       >
-        {/* <EditItem/> */}
+        <SeeIulaanParticipants/>
 
       </Modal>
     );
@@ -100,10 +99,11 @@ interface Values {
 
 
 
-export const Users = () => {
+export const Iulaan = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
+   
     const onCreate = (values: any) => {
         console.log('Received values of form: ', values);
         setOpen(false);
@@ -118,12 +118,12 @@ export const Users = () => {
 
 
     const [data, setData] = useState([
-        {id: '1',
-        category: 'test category',
-        model: 'tesla',
-        item: 'Ts-001',
-        total: '233',
-        remaining: '3545',
+        {iulaanNo: '1',
+        date: 'test category',
+        description: 'tesla',
+        status: 'Ts-001',
+        deadline: '233',
+        applied: '25'
     
     }
     ])
@@ -132,70 +132,53 @@ export const Users = () => {
     const columns = [
         {
             key: '1',
-            title: 'ID',
-            dataIndex: 'id'
+            title: 'Iulaan No.',
+            dataIndex: 'iulaanNo'
         },
         {
             key: '2',
-            title: 'Name',
-            dataIndex: 'name'
+            title: 'Date',
+            dataIndex: 'date'
         },
         {
             key: '3',
-            title: 'Model No.',
-            dataIndex: 'model'
+            title: 'Description',
+            dataIndex: 'description'
         },
         {
             key: '4',
-            title: 'Title',
-            dataIndex: 'title'
+            title: 'Status ',
+            dataIndex: 'status'
         }, {
             key: '5',
-            title: 'Email',
-            dataIndex: 'email'
+            title: 'Deadline',
+            dataIndex: 'deadline'
         }
-        , {
-            key: '6',
-            title: 'Phone',
-            dataIndex: 'phone'
-        } , {
-            key: '7',
-            title: 'Username',
-            dataIndex: 'username'
-        }
-        , {
-            key: '8',
-            title: 'Department',
-            dataIndex: 'department'
-        },
-        {
-            key: '9',
-            title: 'Location',
-            dataIndex: 'location'
-        },
-     {
-            key: '13',
-            title: 'Actions',
-            dataIndex: 'actions',
-            render: (_ : any, record:any) => (
-                     <div>
-                        <Button
-                      icon = { <EditOutlined />}
-                      style={{marginRight:5, color: "green"}}
-                      onClick={ ()=> setEditOpen(true)}
-                     />
-                      <span />
-                     <Button icon ={<DeleteOutlined />} style={{color: "red"}} /> 
-                     
-                     </div>
-                     
-                     
-            )
-                  
-            
-
-          
-        }
+        ,{
+          key: '5',
+          title: 'Applied',
+          dataIndex: 'applied'
+      }, {
+        key: '13',
+        title: 'View More',
+        dataIndex: 'actions',
+        render: (_ : any, record:any) => (
+                 <div>
+                   
+                  <Button
+                  icon = { <EyeFilled />}
+                  style={{marginRight:5, color: "green"}}
+                  onClick={ ()=> setEditOpen(true)}
+                  title="Process"
+                 >See Details</Button>
+               
+                 
+                 </div>
+                 
+                 
+        )}
+      
+     
     ]
 
     const options = [{ value: 'gold' }, { value: 'lime' }, { value: 'green' }, { value: 'cyan' }];
@@ -205,32 +188,13 @@ export const Users = () => {
 
         <div>
 
-        <PageTitle> Consumables </PageTitle>
+        <PageTitle> Applicants List  </PageTitle>
 
       
 
-        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 5}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
+        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 10}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
              allowClear /></div>
             
-        <Space size={200} style={{display: "flex", justifyContent: "space-between", marginBottom: 10, marginRight: 20}}>
-        <Button
-         type="primary"
-         shape="round"
-         onClick={() => {
-            setOpen(true);
-          }}
-         style={{paddingInline:20, marginLeft: 20, height: 40}}  
-         icon={<PlusOutlined/>}
-        ><UserAddOutlined/></Button>
-             <Select
-    mode="multiple"
-    
-    defaultValue={['gold', 'cyan']}
-    style={{ width: '100%', minWidth: 200, }}
-    options={options}
-  />
-  </Space>
-
 
 
   <div>
@@ -254,9 +218,12 @@ export const Users = () => {
     </div>
 
 
+        
+
         <Table
         columns={columns}
         dataSource={data}
+        style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         >
 
 

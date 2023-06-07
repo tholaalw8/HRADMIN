@@ -5,6 +5,6 @@ interface PageTitleProps {
 export const PageTitle = (props: PageTitleProps)=>{
 
     return (
-        <div  style={{margin: "3vh",}}><h2> {props.children}</h2> </div>
+        <div  style={{margin: "3vh", }}><h2> {props.children}</h2> </div>
     )
 }

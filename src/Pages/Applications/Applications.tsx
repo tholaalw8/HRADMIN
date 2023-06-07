@@ -1,9 +1,10 @@
-import { Button, Select, Space, Table, Modal, Form, Radio, Input } from "antd"
+import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
-import { PageTitle } from "../../../components/pageTitle"
-import { AppstoreAddOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, FundProjectionScreenOutlined, GooglePlusOutlined, PlusOutlined, UserAddOutlined } from "@ant-design/icons"
+import { PageTitle } from "../../components/pageTitle"
+import { ApiOutlined, ArrowDownOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, EyeOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-
+import { CreateItem } from "./CreateItem"
+import { EditApplicant } from "./EditApplicant"
 
 
 
@@ -35,10 +36,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '80vh'}}
         open={open}
-        title="Create New User"
-        okText="Create User"
+        title="Create New Consumable Item"
+        okText="Create Item"
         cancelText="Cancel"
         onCancel={onCancel}
         onOk={() => {
@@ -53,7 +54,7 @@ interface Values {
             });
         }}
       >
-        {/* <CreateItem/> */}
+        <CreateItem/>
 
       </Modal>
     );
@@ -68,12 +69,13 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '90vh'}}
         open={EditOpen}
-        title="Edit User"
-        okText="Edit User"
+        title="User Details"
+        okText="Save Changes"
         cancelText="Cancel"
         onCancel={onEditModalCancel}
+        footer={null}
         onOk={() => {
           form
             .validateFields()
@@ -86,7 +88,7 @@ interface Values {
             });
         }}
       >
-        {/* <EditItem/> */}
+        <EditApplicant/>
 
       </Modal>
     );
@@ -99,7 +101,7 @@ interface Values {
 
 
 
-export const Locations = () => {
+export const Applications = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
@@ -131,46 +133,43 @@ export const Locations = () => {
     const columns = [
         {
             key: '1',
-            title: 'ID',
+            title: 'ID Card No',
             dataIndex: 'id'
         },
         {
             key: '2',
-            title: 'Location Name',
-            dataIndex: 'locname'
+            title: 'Iulaan No.',
+            dataIndex: 'category'
         },
         {
             key: '3',
-            title: 'Consumables',
-            dataIndex: 'noOfConsumables'
+            title: 'Applicant Full Name',
+            dataIndex: 'model'
         },
         {
             key: '4',
-            title: 'Users',
-            dataIndex: 'users'
+            title: 'Application Status ',
+            dataIndex: 'item'
         }, {
             key: '5',
-            title: 'Address',
-            dataIndex: 'address'
+            title: 'Attachments',
+            dataIndex: 'total'
         }
-        , {
-            key: '6',
-            title: 'Island',
-            dataIndex: 'island'
-        } ,
+        ,
      {
             key: '13',
-            title: 'Actions',
+            title: 'View More',
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
                      <div>
-                        <Button
-                      icon = { <EditOutlined />}
+                       
+                      <Button
+                      icon = { <EyeOutlined />}
                       style={{marginRight:5, color: "green"}}
                       onClick={ ()=> setEditOpen(true)}
-                     />
-                      <span />
-                     <Button icon ={<DeleteOutlined />} style={{color: "red"}} /> 
+                      title="Process"
+                     >See Details</Button>
+                   
                      
                      </div>
                      
@@ -190,32 +189,13 @@ export const Locations = () => {
 
         <div>
 
-        <PageTitle> Locations </PageTitle>
+        <PageTitle> Applications </PageTitle>
 
       
 
-        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 5}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
+        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 20, }}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
              allowClear /></div>
             
-        <Space size={200} style={{display: "flex", justifyContent: "space-between", marginBottom: 10, marginRight: 20}}>
-        <Button
-         type="primary"
-         shape="round"
-         onClick={() => {
-            setOpen(true);
-          }}
-         style={{paddingInline:20, marginLeft: 20, height: 40}}  
-         icon={<PlusOutlined/>}
-        >Location</Button>
-             <Select
-    mode="multiple"
-    
-    defaultValue={['gold', 'cyan']}
-    style={{ width: '100%', minWidth: 200, }}
-    options={options}
-  />
-  </Space>
-
 
 
   <div>
@@ -242,6 +222,7 @@ export const Locations = () => {
         <Table
         columns={columns}
         dataSource={data}
+        style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         >
 
 

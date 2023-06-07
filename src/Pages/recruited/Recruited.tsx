@@ -1,10 +1,10 @@
-import { Button, Select, Space, Table, Modal, Form, Radio, Input } from "antd"
+import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
-import { PageTitle } from "../components/pageTitle"
-import { ClearOutlined, ContainerOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons"
+import { PageTitle } from "../../components/pageTitle"
+import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-import { CreateItem } from "./Consumable/CreateItem"
-import { EditItem } from "./Consumable/EditItem"
+
+import { EditItem } from "./EditItem"
 
 
 
@@ -16,11 +16,7 @@ interface Values {
     modifier: string;
   }
   
-  interface CollectionCreateFormProps {
-    open: boolean;
-    onCreate: (values: Values) => void;
-    onCancel: () => void;
-  }
+ 
 
   interface CollectionEditFormProps {
     EditOpen: boolean;
@@ -28,37 +24,7 @@ interface Values {
     onEditModalCancel: () => void;
   }
   
-  const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
-    open,
-    onCreate,
-    onCancel,
-  }) => {
-    const [form] = Form.useForm();
-    return (
-      <Modal
-        style={{minWidth: 700}}
-        open={open}
-        title="Create New Consumable Item"
-        okText="Create Item"
-        cancelText="Cancel"
-        onCancel={onCancel}
-        onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              onCreate(values);
-            })
-            .catch((info) => {
-              console.log('Validate Failed:', info);
-            });
-        }}
-      >
-        {/* <CreateItem/> */}
-
-      </Modal>
-    );
-  };
+  
 
 
   const CollectionEditForm: React.FC<CollectionEditFormProps> = ({
@@ -87,7 +53,7 @@ interface Values {
             });
         }}
       >
-        {/* <EditItem/> */}
+        <EditItem/>
 
       </Modal>
     );
@@ -100,15 +66,11 @@ interface Values {
 
 
 
-export const Imports = () => {
+export const Recruited = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
-    const onCreate = (values: any) => {
-        console.log('Received values of form: ', values);
-        setOpen(false);
-      };
-
+    
 
     const onEdit = (values: any) => {
       console.log('Recieved values of form: ', values)
@@ -132,33 +94,56 @@ export const Imports = () => {
     const columns = [
         {
             key: '1',
-            title: 'File',
-            dataIndex: 'file'
+            title: 'ID',
+            dataIndex: 'id'
         },
         {
             key: '2',
-            title: 'created',
-            dataIndex: 'created'
+            title: 'Iulaan No.',
+            dataIndex: 'category'
         },
         {
             key: '3',
-            title: 'Size',
-            dataIndex: 'size'
+            title: 'No. Of Applicants',
+            dataIndex: 'model'
         },
-       
+        {
+            key: '4',
+            title: 'Status ',
+            dataIndex: 'item'
+        }, {
+            key: '5',
+            title: 'Attended',
+            dataIndex: 'total'
+        }
+        , {
+            key: '6',
+            title: 'Remaining',
+            dataIndex: 'remaining'
+        } 
+        , {
+            key: '',
+            title: 'Remaining',
+            dataIndex: 'remaining'
+        } ,
      {
             key: '13',
             title: 'Actions',
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
                      <div>
-                        <Button
-                      icon = { <ContainerOutlined />}
+                        <Popconfirm   title="Are you sure delete this Item?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
+                    } style={{color: "red"}} 
+                      onClick={()=> {console.log("You clicked delete Button! ")}}
+                    >Send Back</Button> </Popconfirm>
+                                             <span />
+                      <Button
+                      icon = { <EditOutlined />}
                       style={{marginRight:5, color: "green"}}
                       onClick={ ()=> setEditOpen(true)}
-                     > Process </Button>
-                      <span />
-                     <Button icon ={<ClearOutlined />} style={{color: "red"}} /> 
+                      title="Process"
+                     >Process</Button>
+                   
                      
                      </div>
                      
@@ -178,35 +163,18 @@ export const Imports = () => {
 
         <div>
 
-        <PageTitle> Imports </PageTitle>
+        <PageTitle> Recruited </PageTitle>
 
-    
+      
+
+        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 10}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
+             allowClear /></div>
             
-        <Space size={200} style={{display: "flex", justifyContent: "flex-end", marginBottom: 10, marginRight: 20}}>
-        <Button
-         
-         shape="round"
-         onClick={() => {
-            setOpen(true);
-          }}
-         style={{paddingInline:20, marginLeft: 20, height: 40, background: "skyblue"}}  
-         icon={<PlusOutlined/>}
-        >Select Import file</Button>
-             
-  </Space>
-
 
 
   <div>
       
-      <CollectionCreateForm
-        open={open}
-        onCreate={onCreate}
-        onCancel={() => {
-          setOpen(false);
-        }}
-      />
-
+      
  <CollectionEditForm
         EditOpen={EditOpen}
         onEdit={onEdit}
@@ -221,6 +189,7 @@ export const Imports = () => {
         <Table
         columns={columns}
         dataSource={data}
+        style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         >
 
 

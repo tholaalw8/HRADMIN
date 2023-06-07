@@ -1,5 +1,5 @@
 import { Form, Modal } from "antd";
-import {useState} from "react"
+import {Children, ReactNode, useState} from "react"
 
 
 
@@ -10,16 +10,35 @@ interface Values {
   }
 
 interface CollectionCreateFormProps {
-    open: boolean;
-    onCreate: (values: Values) => void;
-    onCancel: () => void;
-    children: string | JSX.Element | JSX.Element[] | (()=> JSX.Element)
+    openModel: boolean;
+    onCreate?: (values: Values) => void;
+    onCancelModal: (value: boolean) => void;
+    onClickedButton?: (value: string) => void;
+    OnOKClicked?: (value: any) => void;
+    children:ReactNode;
+    modelTitle: string;
+    okText: string;
+    CancelText: string;
+    footer?: any;
   }
 
 
-export const GenericModalForm: React.FC = () => {
+export const GenericModalForm: React.FC<CollectionCreateFormProps> = ({
+  openModel,
+  onCancelModal,
+  modelTitle,
+  okText,
+  CancelText,
+  children,
+  OnOKClicked,
+  footer,
+  onClickedButton
+}) => {
 
-  const [open, setOpen] = useState(true);
+ 
+   const myForm = Form.useFormInstance();
+
+   
 
 
 
@@ -28,26 +47,20 @@ export const GenericModalForm: React.FC = () => {
     return (
       <Modal
         style={{minWidth: 700}}
-         open={open}
-        title="GENERIC MODAL WINDOW"
-        okText="GENERIC OK"
-        cancelText="GENERIC CANCEL"
-        onCancel={()=> {
-          setOpen(false);
-        }}
-        onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              // onCreate(values);
-            })
-            .catch((info) => {
-              console.log('Validate Failed:', info);
-            });
-        }}
+         open={openModel}
+        title= {modelTitle}
+        okText={okText}
+        cancelText={CancelText}
+        onCancel={ ()=> onCancelModal(false)}
+        onOk={ OnOKClicked}
+        footer={footer}
       >
-        
+        <div>
+          {children}
+          
+
+       
+        </div>
   
       </Modal>
     );

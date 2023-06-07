@@ -1,14 +1,13 @@
 import {Routes, Route} from "react-router-dom"
-import { Users } from "../Pages/Users/Users";
-import { Consumables } from "../Pages/Consumable/Consumables";
-import { Imports } from "../Pages/Imports";
-import { Categories } from "../Pages/Settings/Categories/Categories";
-import { Locations } from "../Pages/Settings/Locations/Locations";
-import { ActivityReport } from "../Pages/Reports/ActivityReports";
-import { Checkout } from "../Pages/CheckInOut/CheckInOut";
-import { Dashboard } from "../Pages/Dashboard";
-import { CreateItem } from "../Pages/Consumable/CreateItem";
-import { Departments } from "../Pages/Settings/Departments/Departments";
+
+import { Applications } from "../Pages/Applications/Applications";
+import { Filtered } from "../Pages/Filtered/Filtered";
+import { Interview } from "../Pages/Interview/Interview";
+import { Passed } from "../Pages/Passed/Passed";
+import { Practical } from "../Pages/Practical/Practical";
+import { Dashboard } from "../Pages/Dashboard/Dashboard";
+import { Recruited } from "../Pages/recruited/Recruited";
+import { Iulaan } from "../Pages/Iulaan/Iulaan";
 
 export default function Contents () {
 
@@ -18,19 +17,15 @@ return (
       <Routes>
             <Route path="/" element={ <Dashboard/>}></Route>
             <Route path="/dashboard" element={<Dashboard/>} ></Route>
-            <Route path="/consumables" element={<Consumables/>} ></Route>
-            <Route path="/people" element={<Users />} ></Route>
-            <Route path="/import" element={<Imports />} ></Route>
-            <Route path="/settings" element={<div> imports </div>} ></Route>
-            <Route path="/category" element={<Categories/>} ></Route>
-            <Route path="/department" element={<Departments/>} ></Route>
-            <Route path="/location" element={<Locations/>} > </Route>
-            <Route path="/reports" element={<div> locations </div>} ></Route>
-            <Route path="/activityReport" element={<ActivityReport />} ></Route>
-            <Route path="/checkout" element={<Checkout/>}></Route>
-            <Route path="/createItem" element={<CreateItem/>}></Route>
-            
-      </Routes>
+            <Route path="/applications" element={ <Applications/>} ></Route>
+            <Route path="/Filtered" element={<Filtered />} ></Route>
+            <Route path="/interview" element={<Interview />} ></Route>
+            <Route path="/passed" element={<Passed />} ></Route>
+            <Route path="/practical" element={<Practical />} ></Route>
+            <Route path="/recruited" element={<Recruited />} ></Route>
+            <Route path="/iulaan" element={<Iulaan />} ></Route>
+             
+               </Routes>
 </div>    
 
 

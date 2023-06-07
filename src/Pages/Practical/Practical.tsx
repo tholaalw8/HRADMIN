@@ -1,10 +1,10 @@
-import { Button, Select, Space, Table, Modal, Form, Radio, Input } from "antd"
+import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
-import { PageTitle } from "../../../components/pageTitle"
-import { CheckOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UserAddOutlined } from "@ant-design/icons"
+import { PageTitle } from "../../components/pageTitle"
+import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-import { CreateItem } from "../../Consumable/CreateItem"
-import { EditItem } from "../../Consumable/EditItem"
+import { CreateItem } from "./CreateItem"
+import { EditItem } from "./EditItem"
 
 
 
@@ -38,8 +38,8 @@ interface Values {
       <Modal
         style={{minWidth: 700}}
         open={open}
-        title="Create New User"
-        okText="Create User"
+        title="Create New Consumable Item"
+        okText="Create Item"
         cancelText="Cancel"
         onCancel={onCancel}
         onOk={() => {
@@ -54,7 +54,7 @@ interface Values {
             });
         }}
       >
-        {/* <CreateItem/> */}
+        <CreateItem/>
 
       </Modal>
     );
@@ -71,8 +71,8 @@ interface Values {
       <Modal
         style={{minWidth: 700}}
         open={EditOpen}
-        title="Edit User"
-        okText="Edit User"
+        title="Edit Consumable Item"
+        okText="Edit Item"
         cancelText="Cancel"
         onCancel={onEditModalCancel}
         onOk={() => {
@@ -87,7 +87,7 @@ interface Values {
             });
         }}
       >
-        {/* <EditItem/> */}
+        <EditItem/>
 
       </Modal>
     );
@@ -100,7 +100,7 @@ interface Values {
 
 
 
-export const Categories = () => {
+export const Practical = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
@@ -137,28 +137,51 @@ export const Categories = () => {
         },
         {
             key: '2',
-            title: 'Name',
-            dataIndex: 'name'
+            title: 'Iulaan No.',
+            dataIndex: 'category'
         },
         {
             key: '3',
-            title: 'Description',
-            dataIndex: 'description'
+            title: 'No. Of Applicants',
+            dataIndex: 'model'
         },
-        
+        {
+            key: '4',
+            title: 'Status ',
+            dataIndex: 'item'
+        }, {
+            key: '5',
+            title: 'Attended',
+            dataIndex: 'total'
+        }
+        , {
+            key: '6',
+            title: 'Remaining',
+            dataIndex: 'remaining'
+        } 
+        , {
+            key: '',
+            title: 'Remaining',
+            dataIndex: 'remaining'
+        } ,
      {
             key: '13',
             title: 'Actions',
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
                      <div>
-                        <Button
+                        <Popconfirm   title="Are you sure delete this Item?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
+                    } style={{color: "red"}} 
+                      onClick={()=> {console.log("You clicked delete Button! ")}}
+                    >Send Back</Button> </Popconfirm>
+                                             <span />
+                      <Button
                       icon = { <EditOutlined />}
                       style={{marginRight:5, color: "green"}}
                       onClick={ ()=> setEditOpen(true)}
-                     />
-                      <span />
-                     <Button icon ={<DeleteOutlined />} style={{color: "red"}} /> 
+                      title="Process"
+                     >Process</Button>
+                   
                      
                      </div>
                      
@@ -178,32 +201,13 @@ export const Categories = () => {
 
         <div>
 
-        <PageTitle> Categories </PageTitle>
+        <PageTitle> Practical </PageTitle>
 
       
 
-        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 5}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
+        <div style={{display:"flex", justifyContent: "flex-end", marginRight: 20, marginBottom: 10}}><Search placeholder="Enter consumable details" onSearch={onSearch} style={{width: 400}} 
              allowClear /></div>
             
-        <Space size={200} style={{display: "flex", justifyContent: "space-between", marginBottom: 10, marginRight: 20}}>
-        <Button
-         type="primary"
-         shape="round"
-         onClick={() => {
-            setOpen(true);
-          }}
-         style={{paddingInline:20, marginLeft: 20, height: 40}}  
-         icon={<PlusOutlined/>}
-        >Category</Button>
-             <Select
-    mode="multiple"
-    
-    defaultValue={['gold', 'cyan']}
-    style={{ width: '100%', minWidth: 200, }}
-    options={options}
-  />
-  </Space>
-
 
 
   <div>
@@ -230,6 +234,7 @@ export const Categories = () => {
         <Table
         columns={columns}
         dataSource={data}
+        style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         >
 
 
