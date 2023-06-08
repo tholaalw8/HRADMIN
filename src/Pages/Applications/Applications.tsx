@@ -119,12 +119,12 @@ export const Applications = () => {
 
 
     const [data, setData] = useState([
-        {id: '1',
-        category: 'test category',
-        model: 'tesla',
-        item: 'Ts-001',
-        total: '233',
-        remaining: '3545',
+        {id: 'A228952',
+        iulaanNo: 'DJA/4568/HUR',
+        fullName: 'Ahmed Mohamed',
+        appStatus: 'Submitted',
+        workflowStatus: 'Open',
+        attachments: '3',
     
     }
     ])
@@ -139,21 +139,26 @@ export const Applications = () => {
         {
             key: '2',
             title: 'Iulaan No.',
-            dataIndex: 'category'
+            dataIndex: 'iulaanNo'
         },
         {
             key: '3',
             title: 'Applicant Full Name',
-            dataIndex: 'model'
+            dataIndex: 'fullName'
         },
         {
             key: '4',
             title: 'Application Status ',
-            dataIndex: 'item'
+            dataIndex: 'appStatus'
         }, {
             key: '5',
-            title: 'Attachments',
-            dataIndex: 'total'
+            title: 'WorkFlow Status',
+            dataIndex: 'workflowStatus'
+        }
+        , {
+            key: '6',
+            title: 'Attachment',
+            dataIndex: 'attachments'
         }
         ,
      {

@@ -5,6 +5,7 @@ import { DeleteOutlined, DownloadOutlined, EditOutlined, EyeFilled, EyeInvisible
 import Search from "antd/es/input/Search"
 import { CreateItem } from "./CreateItem"
 import { SeeIulaanParticipants } from "./SeeIulaanParticipants"
+import type { ColumnsType } from 'antd/es/table';
 
 
 
@@ -16,19 +17,19 @@ interface Values {
     modifier: string;
   }
   
-  interface CollectionCreateFormProps {
+  interface IulaanProps {
     open: boolean;
     onCreate: (values: Values) => void;
     onCancel: () => void;
   }
 
-  interface CollectionEditFormProps {
+  interface SeeIulaanParticipantsProps {
     EditOpen: boolean;
     onEdit: (values: Values) => void;
     onEditModalCancel: () => void;
   }
   
-  const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
+  const CollectionCreateForm: React.FC<IulaanProps> = ({
     open,
     onCreate,
     onCancel,
@@ -61,7 +62,7 @@ interface Values {
   };
 
 
-  const CollectionEditForm: React.FC<CollectionEditFormProps> = ({
+  const SeeIulaanChildTable: React.FC<SeeIulaanParticipantsProps> = ({
     EditOpen,
     onEdit,
     onEditModalCancel,
@@ -96,9 +97,6 @@ interface Values {
 
 
 
-
-
-
 export const Iulaan = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
@@ -117,13 +115,64 @@ export const Iulaan = () => {
 
 
 
+
+
+    const [selectedRowKeys, SetSelectedRowKeys] = useState<React.Key[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [Rejectloading, setRejectLoading] = useState(false);
+  const [OpenStatusloading, setOpenStatusLoading] = useState(false);
+
+
+  const start = () => {
+    setLoading(true);
+    // ajax request after empty completing
+    setTimeout(() => {
+      SetSelectedRowKeys([]);
+      setLoading(false);
+    }, 1000);
+  };
+  const startReject = () => {
+    setRejectLoading(true);
+    // ajax request after empty completing
+    setTimeout(() => {
+      SetSelectedRowKeys([]);
+      setRejectLoading(false);
+    }, 1000);
+  };
+  const startOpenStatus = () => {
+    setOpenStatusLoading(true);
+    // ajax request after empty completing
+    setTimeout(() => {
+      SetSelectedRowKeys([]);
+      setOpenStatusLoading(false);
+    }, 1000);
+  };
+
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    SetSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  const hasSelected = selectedRowKeys.length > 0;
+
+
+
+
+
+
     const [data, setData] = useState([
-        {iulaanNo: '1',
-        date: 'test category',
-        description: 'tesla',
-        status: 'Ts-001',
-        deadline: '233',
-        applied: '25'
+        {iulaanNo: 'HR/5865/1456',
+        date: '25 June 2023',
+        description: 'Procurement Officer Post',
+        status: 'Open for Submission',
+        deadline: '01 July 2023',
+        applied: '25',
+        workflowStatus: 'open'
     
     }
     ])
@@ -148,8 +197,52 @@ export const Iulaan = () => {
         {
             key: '4',
             title: 'Status ',
-            dataIndex: 'status'
+            dataIndex: 'status',
+            filters: [
+              {
+                text: 'Open For Submission',
+                value: 'open',
+              },
+              {
+                text: 'Closed For Submission',
+                value: 'closed',
+              },
+             
+            ]
         }, {
+            key: '5',
+            title: 'Workflow Status',
+            dataIndex: 'workflowStatus',
+            filters: [
+              {
+                text: 'open',
+                value: 'open',
+              }
+              ,
+              {
+                text: 'filtered',
+                value: 'filtered',
+              }
+              ,
+              {
+                text: 'practical',
+                value: 'practical',
+              },
+              {
+                text: 'Interview',
+                value: 'Interview',
+              },
+              {
+                text: 'passed',
+                value: 'passed',
+              },
+              {
+                text: 'Finished',
+                value: 'finished',
+              },
+            ]
+        }
+        , {
             key: '5',
             title: 'Deadline',
             dataIndex: 'deadline'
@@ -188,7 +281,7 @@ export const Iulaan = () => {
 
         <div>
 
-        <PageTitle> Applicants List  </PageTitle>
+        <PageTitle> Iulaan </PageTitle>
 
       
 
@@ -199,20 +292,31 @@ export const Iulaan = () => {
 
   <div>
       
-      <CollectionCreateForm
-        open={open}
-        onCreate={onCreate}
-        onCancel={() => {
-          setOpen(false);
-        }}
-      />
+  <div style={{marginBottom: 16, }}>
+        <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
+          Close Submission
+        </Button>
+        <Button type="primary" onClick={startReject} disabled={!hasSelected} loading={Rejectloading} style={{marginLeft: '10px', background: !hasSelected ? '':'red'}}>
+          Delete Iulaan
+        </Button>
+        <Button type="primary" onClick={startOpenStatus} disabled={!hasSelected} loading={OpenStatusloading} style={{marginLeft: '10px', background: !hasSelected ? '':'green'}}>
+          Open Submission
+        </Button>
 
- <CollectionEditForm
+
+        <span style={{marginLeft: '10px'}}>
+          {hasSelected ? `Selected ${selectedRowKeys.length} applicant(s)` : ''}
+        </span>
+      </div>   
+
+
+ <SeeIulaanChildTable
         EditOpen={EditOpen}
         onEdit={onEdit}
         onEditModalCancel={() => {
           setEditOpen(false);
         }}
+        
       /> 
 
     </div>
@@ -224,6 +328,8 @@ export const Iulaan = () => {
         columns={columns}
         dataSource={data}
         style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
+        rowSelection={rowSelection}
+        
         >
 
 

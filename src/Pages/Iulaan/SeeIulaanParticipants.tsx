@@ -6,25 +6,88 @@ import {
     Table
   } from 'antd';
   import React, { useState } from 'react';
+  import type { ColumnsType } from "antd/es/table";
 
 
-export const SeeIulaanParticipants: React.FC = () =>{
-    
-    const [data, setData] = useState([
-      {id: '1',
-      category: 'test category',
-      model: 'tesla',
-      item: 'Ts-001',
-      total: '233',
-      remaining: '3545',
-  
+
+
+
+
+  interface DataType {
+    key: React.Key;
+    Id: string;
+    fullName: string;
+    AppStatus: string;
+    workflowstatus: string;
   }
-  ])
+
+
+
+
+
+
+  
+
+  const columns: ColumnsType<DataType>  = [
+    {
+              title: 'ID Card No',
+        dataIndex: 'id'
+    },
+    {
+            title: 'Applicant Full Name',
+        dataIndex: 'fullName'
+    },
+    {
+                 title: 'Application Status ',
+        dataIndex: 'AppStatus'
+    }, 
+    {
+        title: 'Workflow Status ',
+        dataIndex: 'workflowstatus'
+    }
+    
+    ,
+ {
+        key: '13',
+        title: 'Downloads',
+        dataIndex: 'actions',
+        render: (_ : any, record:any) => (
+                 <div>
+                  <Button
+                  icon = { <DownloadOutlined />}
+                  style={{marginRight:5, color: "green"}}
+                  // onClick={ ()=> setEditOpen(true)}
+                  title="Process"
+                 >Attachements</Button>
+                 </div>
+        )
+    }
+]
+
+
+const data: DataType[]=[];
+for (let i=0; i < 46; i++){
+  data.push({
+   key: i,
+   Id: 'A280684',
+   fullName: 'Ahmed Mohamed',
+   AppStatus: 'submitted',
+   workflowstatus: 'Open',
+  })
+}
+
+  
+export const SeeIulaanParticipants: React.FC = () =>{
+ 
+   
+
 
 
 
   const [selectedRowKeys, SetSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
+  const [Rejectloading, setRejectLoading] = useState(false);
+  const [OpenStatusloading, setOpenStatusLoading] = useState(false);
 
 
   const start = () => {
@@ -33,6 +96,22 @@ export const SeeIulaanParticipants: React.FC = () =>{
     setTimeout(() => {
       SetSelectedRowKeys([]);
       setLoading(false);
+    }, 1000);
+  };
+  const startReject = () => {
+    setRejectLoading(true);
+    // ajax request after empty completing
+    setTimeout(() => {
+      SetSelectedRowKeys([]);
+      setRejectLoading(false);
+    }, 1000);
+  };
+  const startOpenStatus = () => {
+    setOpenStatusLoading(true);
+    // ajax request after empty completing
+    setTimeout(() => {
+      SetSelectedRowKeys([]);
+      setOpenStatusLoading(false);
     }, 1000);
   };
 
@@ -53,44 +132,7 @@ export const SeeIulaanParticipants: React.FC = () =>{
 
 
 
-  const columns = [
-      {
-          key: '1',
-          title: 'ID Card No',
-          dataIndex: 'id'
-      },
-      {
-          key: '3',
-          title: 'Applicant Full Name',
-          dataIndex: 'model'
-      },
-      {
-          key: '4',
-          title: 'Application Status ',
-          dataIndex: 'item'
-      }, {
-          key: '5',
-          title: 'Attachments',
-          dataIndex: 'total'
-      }
-      
-      ,
-   {
-          key: '13',
-          title: 'Downloads',
-          dataIndex: 'actions',
-          render: (_ : any, record:any) => (
-                   <div>
-                    <Button
-                    icon = { <DownloadOutlined />}
-                    style={{marginRight:5, color: "green"}}
-                    // onClick={ ()=> setEditOpen(true)}
-                    title="Process"
-                   >Attachements</Button>
-                   </div>
-          )
-      }
-  ]
+
 
     return (
         <div>
@@ -99,10 +141,18 @@ export const SeeIulaanParticipants: React.FC = () =>{
 
      <PageTitle> Applicants List</PageTitle>
       
-     <div style={{marginBottom: 16}}>
+     <div style={{marginBottom: 16, marginLeft: '-530px'}}>
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
           Send to Filtered
         </Button>
+        <Button type="primary" onClick={startReject} disabled={!hasSelected} loading={Rejectloading} style={{marginLeft: '10px', background: !hasSelected ? '':'red'}}>
+          Reject
+        </Button>
+        <Button type="primary" onClick={startOpenStatus} disabled={!hasSelected} loading={OpenStatusloading} style={{marginLeft: '10px', background: !hasSelected ? '':'green'}}>
+          Open Status
+        </Button>
+
+
         <span style={{marginLeft: '10px'}}>
           {hasSelected ? `Selected ${selectedRowKeys.length} applicant(s)` : ''}
         </span>

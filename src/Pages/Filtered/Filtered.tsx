@@ -4,6 +4,7 @@ import { PageTitle } from "../../components/pageTitle"
 import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
 import { EditItem } from "./EditItem"
+import { FilteredParticipants } from "./FilteredParticipants"
 
 
 
@@ -33,10 +34,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '125vh'}}
         open={EditOpen}
-        title="Edit Consumable Item"
-        okText="Edit Item"
+        title="Filtered"
+        okText="OK"
         cancelText="Cancel"
         onCancel={onEditModalCancel}
         onOk={() => {
@@ -51,7 +52,7 @@ interface Values {
             });
         }}
       >
-        <EditItem/>
+        <FilteredParticipants/>
 
       </Modal>
     );
