@@ -1,10 +1,11 @@
 import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
 import { PageTitle } from "../../components/pageTitle"
-import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
+import { ArrowRightOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, SettingOutlined, UndoOutlined, UserAddOutlined, UserOutlined, UserSwitchOutlined, UsergroupAddOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-import { CreateItem } from "./CreateItem"
-import { EditItem } from "./EditItem"
+import { EditItem } from "./EditPractical"
+import { PracticalParticipants } from "./PractiacalParticipants"
+import { PracticalParticipantsx } from "./PractiacalParticipants_backup"
 
 
 
@@ -16,49 +17,14 @@ interface Values {
     modifier: string;
   }
   
-  interface CollectionCreateFormProps {
-    open: boolean;
-    onCreate: (values: Values) => void;
-    onCancel: () => void;
-  }
-
+ 
   interface CollectionEditFormProps {
     EditOpen: boolean;
     onEdit: (values: Values) => void;
     onEditModalCancel: () => void;
   }
   
-  const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
-    open,
-    onCreate,
-    onCancel,
-  }) => {
-    const [form] = Form.useForm();
-    return (
-      <Modal
-        style={{minWidth: 700}}
-        open={open}
-        title="Create New Consumable Item"
-        okText="Create Item"
-        cancelText="Cancel"
-        onCancel={onCancel}
-        onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              onCreate(values);
-            })
-            .catch((info) => {
-              console.log('Validate Failed:', info);
-            });
-        }}
-      >
-        <CreateItem/>
 
-      </Modal>
-    );
-  };
 
 
   const CollectionEditForm: React.FC<CollectionEditFormProps> = ({
@@ -69,10 +35,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '125vh'}}
         open={EditOpen}
-        title="Edit Consumable Item"
-        okText="Edit Item"
+        title="Filtered"
+        okText="OK"
         cancelText="Cancel"
         onCancel={onEditModalCancel}
         onOk={() => {
@@ -87,7 +53,7 @@ interface Values {
             });
         }}
       >
-        <EditItem/>
+        <PracticalParticipantsx/>
 
       </Modal>
     );
@@ -103,11 +69,6 @@ interface Values {
 export const Practical = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
-
-    const onCreate = (values: any) => {
-        console.log('Received values of form: ', values);
-        setOpen(false);
-      };
 
 
     const onEdit = (values: any) => {
@@ -170,17 +131,23 @@ export const Practical = () => {
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
                      <div>
-                        <Popconfirm   title="Are you sure delete this Item?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
+                        <Popconfirm   title="Are you sure reopen workflow?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
                     } style={{color: "red"}} 
                       onClick={()=> {console.log("You clicked delete Button! ")}}
                     >Send Back</Button> </Popconfirm>
                                              <span />
                       <Button
-                      icon = { <EditOutlined />}
-                      style={{marginRight:5, color: "green"}}
+                      icon = { <UsergroupAddOutlined />}
+                      style={{marginRight:5, }}
                       onClick={ ()=> setEditOpen(true)}
                       title="Process"
-                     >Process</Button>
+                     > Process List</Button>
+                      <Button
+                      icon = { <ArrowRightOutlined />}
+                      style={{marginRight:5, color: "green"}}
+                      // onClick={ ()=> setEditOpen(true)}
+                      title="Send to Practical"
+                     >Send to Interview</Button>
                    
                      
                      </div>
@@ -212,13 +179,7 @@ export const Practical = () => {
 
   <div>
       
-      <CollectionCreateForm
-        open={open}
-        onCreate={onCreate}
-        onCancel={() => {
-          setOpen(false);
-        }}
-      />
+     
 
  <CollectionEditForm
         EditOpen={EditOpen}

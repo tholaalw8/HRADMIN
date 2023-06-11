@@ -2,7 +2,7 @@ import { Card, Layout, Space, Statistic, Typography } from "antd";
 import { GenericModalForm } from "../../components/GenericCreateModalForm";
 import { PageTitle } from "../../components/pageTitle";
 import { CreateItem } from "../Applications/CreateItem";
-import { CheckOutlined, InboxOutlined, PullRequestOutlined, ReconciliationFilled, ReconciliationOutlined, SendOutlined, ShoppingCartOutlined, SwapOutlined } from "@ant-design/icons";
+import { CheckOutlined, FolderOpenOutlined, InboxOutlined, PullRequestOutlined, ReconciliationFilled, ReconciliationOutlined, SendOutlined, ShoppingCartOutlined, SwapOutlined } from "@ant-design/icons";
 import { HistoryTable } from "./Historytable";
 
 
@@ -39,10 +39,10 @@ export const Dashboard = () =>{
          <Layout style={{margin: 20}}>
             <Space direction="horizontal" >
                 
-                   <DashboardItem title="Checkins Today" value={233}  item={<InboxOutlined/> }  mystyle={{color: "green"}}/>
-                   <DashboardItem title="Check Outs  Today" value={233} item={<ShoppingCartOutlined/>} mystyle={{color: "red"}}/>
-                   <DashboardItem title="Transfer Orders Today" value={233} item={<SwapOutlined/>} mystyle={{color: "navy"}}/>
-                   <DashboardItem title="Request Orders Today" value={233} item={<ReconciliationOutlined/>} mystyle={{color: "skyblue"}}/>
+                   <DashboardItem title="Open" value={233}  item={<FolderOpenOutlined/> }  mystyle={{color: "green"}}/>
+                   <DashboardItem title="On Practical" value={233} item={<ShoppingCartOutlined/>} mystyle={{color: "red"}}/>
+                   <DashboardItem title="On Interview" value={233} item={<SwapOutlined/>} mystyle={{color: "navy"}}/>
+                   <DashboardItem title="Application Submission not Attended" value={233} item={<ReconciliationOutlined/>} mystyle={{color: "skyblue"}}/>
                    
             </Space>
           

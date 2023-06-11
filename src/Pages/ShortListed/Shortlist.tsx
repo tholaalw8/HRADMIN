@@ -4,7 +4,7 @@ import { PageTitle } from "../../components/pageTitle"
 import { DeleteOutlined, DownloadOutlined, EditOutlined, EyeFilled, EyeInvisibleTwoTone, PlusOutlined, UndoOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
 import { CreateItem } from "./CreateItem"
-import { SeeIulaanParticipants } from "./SeeIulaanParticipants"
+import { SeeShortlistedParticipants } from "./SeeShortlistedParticipants"
 import type { ColumnsType } from 'antd/es/table';
 
 
@@ -87,7 +87,7 @@ interface Values {
             });
         }}
       >
-        <SeeIulaanParticipants/>
+        <SeeShortlistedParticipants/>
 
       </Modal>
     );
@@ -97,7 +97,7 @@ interface Values {
 
 
 
-export const Iulaan = () => {
+export const Shortlist = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
@@ -281,7 +281,7 @@ export const Iulaan = () => {
 
         <div>
 
-        <PageTitle> Iulaan </PageTitle>
+        <PageTitle> Shortlist </PageTitle>
 
       
 

@@ -77,7 +77,7 @@ for (let i=0; i < 46; i++){
 }
 
   
-export const SeeIulaanParticipants: React.FC = () =>{
+export const SeeShortlistedParticipants: React.FC = () =>{
  
    
 
@@ -137,19 +137,22 @@ export const SeeIulaanParticipants: React.FC = () =>{
     return (
         <div>
            
-     <Space style={{display: "flex",flexDirection: "column"}}>
+     
 
      <PageTitle> Applicants List</PageTitle>
       
-     <div style={{marginBottom: 16, marginLeft: '-530px'}}>
+     <div style={{marginBottom: 16, }}>
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-          Send to Filtered
+          Approve Application
         </Button>
         <Button type="primary" onClick={startReject} disabled={!hasSelected} loading={Rejectloading} style={{marginLeft: '10px', background: !hasSelected ? '':'red'}}>
           Reject
         </Button>
         <Button type="primary" onClick={startOpenStatus} disabled={!hasSelected} loading={OpenStatusloading} style={{marginLeft: '10px', background: !hasSelected ? '':'green'}}>
           Open Status
+        </Button>
+        <Button type="primary" onClick={startOpenStatus} disabled={!hasSelected} loading={OpenStatusloading} style={{justifyContent: 'center',marginLeft: '10px', background: !hasSelected ? '':'green'}}>
+          Send List to Practical
         </Button>
 
 
@@ -168,7 +171,7 @@ export const SeeIulaanParticipants: React.FC = () =>{
 
       </Table>
       
-</Space>
+
      
 
         </div>

@@ -1,10 +1,10 @@
 import { Button, Select, Space, Table, Modal, Form, Radio, Input, Popconfirm } from "antd"
 import  React,{useState} from 'react'
 import { PageTitle } from "../../components/pageTitle"
-import { DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, UndoOutlined } from "@ant-design/icons"
+import { ArrowRightOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, SettingOutlined, UndoOutlined, UserAddOutlined, UserOutlined, UserSwitchOutlined, UsergroupAddOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-
-import { EditItem } from "./EditItem"
+import { EditInterview } from "./EditInterview"
+import { InterviewParticipants } from "./InterviewParticipants"
 
 
 
@@ -16,15 +16,14 @@ interface Values {
     modifier: string;
   }
   
-  
-
+ 
   interface CollectionEditFormProps {
     EditOpen: boolean;
     onEdit: (values: Values) => void;
     onEditModalCancel: () => void;
   }
   
-  
+
 
 
   const CollectionEditForm: React.FC<CollectionEditFormProps> = ({
@@ -35,10 +34,10 @@ interface Values {
     const [form] = Form.useForm();
     return (
       <Modal
-        style={{minWidth: 700}}
+        style={{minWidth: '125vh'}}
         open={EditOpen}
-        title="Edit Consumable Item"
-        okText="Edit Item"
+        title="Filtered"
+        okText="OK"
         cancelText="Cancel"
         onCancel={onEditModalCancel}
         onOk={() => {
@@ -53,7 +52,7 @@ interface Values {
             });
         }}
       >
-        <EditItem/>
+        <InterviewParticipants/>
 
       </Modal>
     );
@@ -70,7 +69,6 @@ export const Interview = () => {
     const [open, setOpen] = useState(false);
     const [EditOpen, setEditOpen] = useState(false);
 
-  
 
     const onEdit = (values: any) => {
       console.log('Recieved values of form: ', values)
@@ -132,17 +130,23 @@ export const Interview = () => {
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
                      <div>
-                        <Popconfirm   title="Are you sure delete this Item?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
+                        <Popconfirm   title="Are you sure reopen workflow?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
                     } style={{color: "red"}} 
                       onClick={()=> {console.log("You clicked delete Button! ")}}
                     >Send Back</Button> </Popconfirm>
                                              <span />
                       <Button
-                      icon = { <EditOutlined />}
-                      style={{marginRight:5, color: "green"}}
+                      icon = { <UsergroupAddOutlined />}
+                      style={{marginRight:5, }}
                       onClick={ ()=> setEditOpen(true)}
                       title="Process"
-                     >Process</Button>
+                     > Process List</Button>
+                      <Button
+                      icon = { <ArrowRightOutlined />}
+                      style={{marginRight:5, color: "green"}}
+                      // onClick={ ()=> setEditOpen(true)}
+                      title="Send to Practical"
+                     >Send To Passed</Button>
                    
                      
                      </div>

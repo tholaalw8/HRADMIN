@@ -25,7 +25,7 @@ import {
   };
 
   
-export const CreateItem: React.FC = () =>{
+export const EditInterview: React.FC = () =>{
     const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
 
 
@@ -47,7 +47,7 @@ export const CreateItem: React.FC = () =>{
            
      <Space style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
 
-     <PageTitle> Create  Item  </PageTitle>
+     <PageTitle> Edit Item  </PageTitle>
    
 
 

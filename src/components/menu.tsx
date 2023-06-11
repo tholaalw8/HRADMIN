@@ -10,7 +10,7 @@ DashboardOutlined, TeamOutlined, RocketOutlined, IconProvider, SendOutlined, Ent
 import Icon from '@ant-design/icons/lib/components/Icon';
 import { ApplicationSVG } from '../SVG/ApplicationsSVG';
 import { hover } from '@testing-library/user-event/dist/hover';
-import { FilterSVG } from '../SVG/FilterSVG';
+
 import { IulaanSVG } from '../SVG/IulaanSVG';
 import { PracticalSVG } from '../SVG/PracticalSVG';
 import { InterviewSVG } from '../SVG/InterviewSVG';
@@ -41,14 +41,12 @@ function getItem(
 const items: MenuProps['items'] = [
   getItem('Dashboard','/dashboard',<DashboardOutlined style={{fontSize:'21px'}}/>),
   getItem('Applications', '/applications', <Icon component={ApplicationSVG} />),
-  getItem('Iulaan', '/iulaan',<Icon component={IulaanSVG} />),
+  getItem('Shortlist', '/shortlist',<Icon component={IulaanSVG} />),
   
   getItem(' Workflow', 'sub3', <Icon component={HiringProcessSVG} style={{paddingTop: '.3vh'}}/>, [
-    getItem('Filtered', '/filtered', <Icon component={FilterSVG}/>),
     getItem('Practical', '/practical', <Icon component={PracticalSVG} />),
     getItem('Interview', '/interview',  <Icon component={InterviewSVG} />),
     getItem('Passed','/passed',<CheckCircleOutlined />),
-    getItem('Recruited','/recruited', <Icon component={RecruitSVG}/>),
    ]),
 
 ]
@@ -73,7 +71,8 @@ const [collapsed, setCollapsed] = useState(false);
   }
   return (
 
-    
+    // radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    // 'linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9))'
     <div style={{height: '100vh', background: 'linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9))',   boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
      
       <Space style={{marginBottom:'5vh'}} >

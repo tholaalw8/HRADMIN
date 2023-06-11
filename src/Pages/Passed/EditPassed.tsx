@@ -25,7 +25,7 @@ import {
   };
 
   
-export const EditItem: React.FC = () =>{
+export const EditPassed: React.FC = () =>{
     const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
 
 

@@ -2,11 +2,13 @@ import { PageTitle } from "../../components/pageTitle"
 import { CheckOutlined, CloseOutlined, DownloadOutlined, } from '@ant-design/icons';
 import {
     Button,
+    Checkbox,
     Space,
     Table
   } from 'antd';
   import React, { useState } from 'react';
   import type { ColumnsType } from "antd/es/table";
+import { TableRowSelection } from "antd/es/table/interface";
 
 
 
@@ -40,6 +42,13 @@ const columns: ColumnsType<DataType> = [
   {
     
       title: 'Acceptance Status',
+      dataIndex: 'acceptanceStatus'
+  }
+  
+  ,
+  {
+    
+      title: 'Score',
       dataIndex: 'acceptanceStatus'
   }
   
@@ -97,7 +106,8 @@ for(let i=0; i<46; i++){
 
 
 
-export const FilteredParticipants: React.FC = () =>{
+
+export const PassedParticipants: React.FC = () =>{
     
    
 
@@ -140,9 +150,29 @@ export const FilteredParticipants: React.FC = () =>{
     SetSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const rowSelection = {
+  const rowSelection: TableRowSelection<DataType> = {
     selectedRowKeys,
     onChange: onSelectChange,
+    selections: [
+      Table.SELECTION_ALL,
+      Table.SELECTION_NONE,
+      {
+        key: 'odd',
+        text: 'Select Odd Rows',
+        onSelect: (changeableRowKeys) => {
+          let newSelectedRowKeys = [];
+          newSelectedRowKeys = changeableRowKeys.filter(
+            (_, index) => {
+              if (index % 2 !==0){
+                return false;
+              }
+              return true;
+            },
+          );
+          SetSelectedRowKeys(newSelectedRowKeys)
+        },
+      },
+    ]
   };
   const hasSelected = selectedRowKeys.length > 0;
 
@@ -211,11 +241,11 @@ export const FilteredParticipants: React.FC = () =>{
            
      <Space style={{display: "flex",flexDirection: "column"}}>
 
-     <PageTitle> Filtered List</PageTitle>
+     <PageTitle> Passed List</PageTitle>
       
      <div style={{marginBottom: 16, marginLeft: '-530px'}}>
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-          Send to Filtered
+          Export as a List
         </Button>
         <Button type="primary" onClick={startReject} disabled={!hasSelected} loading={Rejectloading} style={{marginLeft: '10px', background: !hasSelected ? '':'red'}}>
           Reject
@@ -224,12 +254,14 @@ export const FilteredParticipants: React.FC = () =>{
           Open Status
         </Button>
 
-
         <span style={{marginLeft: '10px'}}>
           {hasSelected ? `Selected ${selectedRowKeys.length} applicant(s)` : ''}
         </span>
+        
       </div>   
 
+
+     
 
      <Table
         columns={columns}
@@ -237,7 +269,7 @@ export const FilteredParticipants: React.FC = () =>{
         style={{minWidth: '110vh', marginBottom: '20vh',boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}
         rowSelection={rowSelection}
         >
-
+          
       </Table>
       
 </Space>
