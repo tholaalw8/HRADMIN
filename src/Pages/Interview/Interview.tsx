@@ -4,7 +4,7 @@ import { PageTitle } from "../../components/pageTitle"
 import { ArrowRightOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, SettingOutlined, UndoOutlined, UserAddOutlined, UserOutlined, UserSwitchOutlined, UsergroupAddOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
 import { EditInterview } from "./EditInterview"
-import { InterviewParticipants } from "./InterviewParticipants"
+import { InterviewParticipants } from "./InterviewParticipantsf"
 
 
 
@@ -91,41 +91,37 @@ export const Interview = () => {
 
     const columns = [
         {
-            key: '1',
+      
             title: 'ID',
             dataIndex: 'id'
         },
         {
-            key: '2',
+         
             title: 'Iulaan No.',
             dataIndex: 'category'
         },
         {
-            key: '3',
+      
             title: 'No. Of Applicants',
             dataIndex: 'model'
         },
         {
-            key: '4',
+     
             title: 'Status ',
             dataIndex: 'item'
         }, {
-            key: '5',
+          
             title: 'Attended',
             dataIndex: 'total'
         }
         , {
-            key: '6',
+         
             title: 'Remaining',
             dataIndex: 'remaining'
         } 
-        , {
-            key: '',
-            title: 'Remaining',
-            dataIndex: 'remaining'
-        } ,
+        ,
      {
-            key: '13',
+          
             title: 'Actions',
             dataIndex: 'actions',
             render: (_ : any, record:any) => (
@@ -133,7 +129,7 @@ export const Interview = () => {
                         <Popconfirm   title="Are you sure reopen workflow?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
                     } style={{color: "red"}} 
                       onClick={()=> {console.log("You clicked delete Button! ")}}
-                    >Send Back</Button> </Popconfirm>
+                    >Re-Open Workflow</Button> </Popconfirm>
                                              <span />
                       <Button
                       icon = { <UsergroupAddOutlined />}

@@ -3,7 +3,7 @@ import  React,{useState} from 'react'
 import { PageTitle } from "../../components/pageTitle"
 import { ArrowRightOutlined, DeleteOutlined, DownloadOutlined, EditOutlined, PlusOutlined, SettingOutlined, UndoOutlined, UserAddOutlined, UserOutlined, UserSwitchOutlined, UsergroupAddOutlined } from "@ant-design/icons"
 import Search from "antd/es/input/Search"
-import { PassedParticipants } from "./PassedParticipants"
+import { PassedParticipants } from "./PassedParticipants" 
 
 
 

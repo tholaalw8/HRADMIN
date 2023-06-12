@@ -46,6 +46,13 @@ const columns: ColumnsType<DataType> = [
   }
   
   ,
+  {
+    
+      title: 'Score',
+      dataIndex: 'acceptanceStatus'
+  }
+  
+  ,
 {
       
       title: 'Downloads',
@@ -100,7 +107,7 @@ for(let i=0; i<46; i++){
 
 
 
-export const InterviewParticipants: React.FC = () =>{
+export const PassedParticipantsxx: React.FC = () =>{
     
    
 
@@ -234,7 +241,7 @@ export const InterviewParticipants: React.FC = () =>{
            
      <Space style={{display: "flex",flexDirection: "column"}}>
 
-     <PageTitle> Interview List</PageTitle>
+     <PageTitle> Passed List</PageTitle>
       
      <div style={{marginBottom: 16, marginLeft: '-530px'}}>
         <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>

@@ -41,7 +41,7 @@ function getItem(
 const items: MenuProps['items'] = [
   getItem('Dashboard','/dashboard',<DashboardOutlined style={{fontSize:'21px'}}/>),
   getItem('Applications', '/applications', <Icon component={ApplicationSVG} />),
-  getItem('Shortlist', '/shortlist',<Icon component={IulaanSVG} />),
+  getItem('Iulaan', '/shortlist',<Icon component={IulaanSVG} />),
   
   getItem(' Workflow', 'sub3', <Icon component={HiringProcessSVG} style={{paddingTop: '.3vh'}}/>, [
     getItem('Practical', '/practical', <Icon component={PracticalSVG} />),

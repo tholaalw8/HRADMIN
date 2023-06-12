@@ -77,7 +77,7 @@ for (let i=0; i < 46; i++){
 }
 
   
-export const SeeShortlistedParticipants: React.FC = () =>{
+export const SeeIulaanParticipants: React.FC = () =>{
  
    
 

@@ -2,8 +2,11 @@ import { Card, Layout, Space, Statistic, Typography } from "antd";
 import { GenericModalForm } from "../../components/GenericCreateModalForm";
 import { PageTitle } from "../../components/pageTitle";
 import { CreateItem } from "../Applications/CreateItem";
-import { CheckOutlined, FolderOpenOutlined, InboxOutlined, PullRequestOutlined, ReconciliationFilled, ReconciliationOutlined, SendOutlined, ShoppingCartOutlined, SwapOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, CheckOutlined, FolderOpenOutlined, InboxOutlined, PullRequestOutlined, QuestionCircleFilled, QuestionCircleOutlined, ReconciliationFilled, ReconciliationOutlined, SendOutlined, ShoppingCartOutlined, SwapOutlined } from "@ant-design/icons";
 import { HistoryTable } from "./Historytable";
+import Icon from "@ant-design/icons/lib/components/Icon";
+import { PracticalSVG } from "../../SVG/PracticalSVG";
+import { InterviewSVG } from "../../SVG/InterviewSVG";
 
 
 
@@ -40,9 +43,9 @@ export const Dashboard = () =>{
             <Space direction="horizontal" >
                 
                    <DashboardItem title="Open" value={233}  item={<FolderOpenOutlined/> }  mystyle={{color: "green"}}/>
-                   <DashboardItem title="On Practical" value={233} item={<ShoppingCartOutlined/>} mystyle={{color: "red"}}/>
-                   <DashboardItem title="On Interview" value={233} item={<SwapOutlined/>} mystyle={{color: "navy"}}/>
-                   <DashboardItem title="Application Submission not Attended" value={233} item={<ReconciliationOutlined/>} mystyle={{color: "skyblue"}}/>
+                   <DashboardItem title="On Practical" value={233} item={ <Icon component={PracticalSVG}/>} mystyle={{color: "red"}}/>
+                   <DashboardItem title="On Interview" value={233} item={<Icon component={InterviewSVG}/>} mystyle={{color: "navy"}}/>
+                   <DashboardItem title="Application Submission not Attended" value={233} item={<QuestionCircleOutlined/>} mystyle={{color: "skyblue"}}/>
                    
             </Space>
           

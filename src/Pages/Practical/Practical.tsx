@@ -134,7 +134,7 @@ export const Practical = () => {
                         <Popconfirm   title="Are you sure reopen workflow?" okText="Yes" cancelText="No">   <Button icon ={<UndoOutlined />
                     } style={{color: "red"}} 
                       onClick={()=> {console.log("You clicked delete Button! ")}}
-                    >Send Back</Button> </Popconfirm>
+                    >Re-Open Workflow</Button> </Popconfirm>
                                              <span />
                       <Button
                       icon = { <UsergroupAddOutlined />}

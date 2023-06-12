@@ -11,24 +11,27 @@ export const HistoryTable = () => {
 
     const [data, setData] = useState([
         {
-        dateTime: '23/33/33',
-        action: 'checkout',
-        qty: '20',
-        user: 'Ahmed',
-        issuedTo: 'Hameed',
-        category: 'General Item',
-        location: 'Fen Gudhan',
-        item: 'Ts-001',
-    },  {
-        dateTime: '24/03/33',
-        action: 'Check In',
-        qty: '30',
-        user: 'Ahmed',
-        issuedTo: 'Wahid Hakeem',
-        category: 'General',
-        location: 'DJA Training Hall',
-        item: 'Ts-001',
-    }
+            dateTime: '23/33/33',
+            Iulaan: 'HR/JB/20210',
+            jobPost: 'Procurement Officer',
+            deadline: '12/06/2023',
+            idcard: 'A235689',
+            fullName: 'Ahmed Haamid',
+            attachments: '3',
+            noofappforthepost: '20',
+            location: 'Male - DJA',
+    }, 
+        {
+            dateTime: '23/33/23',
+            Iulaan: 'HR/JB/9999',
+            jobPost: 'ICT Officer',
+            deadline: '14/06/2023',
+            idcard: 'A3030303',
+            fullName: 'Waheed Haamid',
+            attachments: '2',
+            noofappforthepost: '7',
+            location: 'Male - DJA',
+    }, 
     ])
 
 
@@ -37,36 +40,42 @@ export const HistoryTable = () => {
             key: '1',
             title: 'Date Time',
             dataIndex: 'dateTime'
+        }, {
+            key: '5',
+            title: 'Iulaan No',
+            dataIndex: 'Iulaan'
         },
         {
             key: '3',
-            title: 'Item',
-            dataIndex: 'item'
+            title: 'Job Post',
+            dataIndex: 'jobPost'
         },
         {
+            key: '3',
+            title: 'Dead Line',
+            dataIndex: 'deadline'
+        },
+
+        {
             key: '2',
-            title: 'Action',
-            dataIndex: 'action'
+            title: 'ID Card',
+            dataIndex: 'idcard'
         },
         
         {
             key: '4',
-            title: 'Quantity',
-            dataIndex: 'qty'
-        }, {
-            key: '5',
-            title: 'User',
-            dataIndex: 'user'
+            title: 'Full Name',
+            dataIndex: 'fullName'
         },
             {
                 key:'8',
-                title: 'Issued To',
-                dataIndex: 'issuedTo'
+                title: 'Attachments',
+                dataIndex: 'attachments'
             }
         , {
             key: '6',
-            title: 'Category',
-            dataIndex: 'category'
+            title: 'No. Applcnt for Post',
+            dataIndex: 'noofappforthepost'
         } , {
             key: '7',
             title: 'Location',

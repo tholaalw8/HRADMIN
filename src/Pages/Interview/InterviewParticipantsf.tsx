@@ -113,7 +113,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   }
 
 
-export const PracticalParticipantsx: React.FC = () =>{
+export const InterviewParticipants: React.FC = () =>{
     
    
 
@@ -462,7 +462,7 @@ const save = async (key: React.Key) =>{
            
      <Space style={{display: "flex",flexDirection: "column"}}>
 
-     <PageTitle> Practical List</PageTitle>
+     <PageTitle> Interview Page</PageTitle>
       
      <div style={{marginBottom: 16, marginLeft: '-530px'}}>
 

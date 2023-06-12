@@ -166,7 +166,11 @@ export const PracticalParticipants: React.FC = () =>{
       
           title: 'Acceptance Status',
           dataIndex: 'acceptanceStatus',
+          render: (text,record)=> <a>hi</a>
           
+      },{
+        title: 'kakkudi',
+        dataIndex: 'kakkudi'
       }
       ,
       {

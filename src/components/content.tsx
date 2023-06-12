@@ -7,7 +7,7 @@ import { Passed } from "../Pages/Passed/Passed";
 import { Practical } from "../Pages/Practical/Practical";
 import { Dashboard } from "../Pages/Dashboard/Dashboard";
 
-import { Shortlist } from "../Pages/ShortListed/Shortlist";
+import { Shortlist } from "../Pages/Iulaan/Iulaan";
 
 export default function Contents () {
 
